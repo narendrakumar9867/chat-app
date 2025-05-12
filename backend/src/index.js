@@ -22,7 +22,7 @@ app.use(cors(
 ));
 
 app.use("/api/auth", authRoute);
-app.use("/api/message", MessageRoute);
+app.use("/api/messages", MessageRoute);
 
 app.listen(PORT, () => {
     console.log(`server is started at ${PORT}`);
