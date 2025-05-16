@@ -1,4 +1,4 @@
-import useChatStore from "../store/useChatStore";
+import { useChatStore } from "../store/useChatStore";
 
 import Sidebar from "../components/Sidebar";
 import NoChatSelected from "../components/NoChatSelected";
@@ -19,7 +19,7 @@ const HomePage = () => {
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default HomePage;
