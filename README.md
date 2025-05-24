@@ -45,7 +45,7 @@ CLOUDINARY_API_SECRET=
 $ git clone https://github.com/HuesApply/HA_backend.git
 
 # Install dependencies
-$ pip install -r requirements.txt
+$ npm install
 
 # Run server for backend
 $ npm start
