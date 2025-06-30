@@ -98,6 +98,25 @@ const LoginPage = () => {
             </button>
           </form>
 
+          {/* Google Auth Button */}
+          <div className="mt-4">
+            <button
+              type="button"
+              className="btn btn-outline w-full flex items-center justify-center gap-2"
+              onClick={() => {
+                console.log("google login button clicked");
+                window.open("http://localhost:7777/api/auth/google", "_self");
+              }}
+            >
+              <img
+                src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                alt="Google"
+                className="w-5 h-5"
+              />
+              Sign in with Google
+            </button>
+          </div>
+
           <div className="text-center">
             <p className="text-base-content/60">
               Don&apos;t have an account?{" "}

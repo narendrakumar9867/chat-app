@@ -13,6 +13,7 @@ export const useAuthStore = create((set, get) => ({
     isCheckingAuth: true,
     onlineUsers: [],
     socket: null,
+    token: null,
 
     checkAuth: async () => {
         try {
@@ -102,5 +103,6 @@ export const useAuthStore = create((set, get) => ({
     },
     disconnectSocket: () => {
         if(get().socket?.connected) get().socket.disconnect();
-    }
+    },
+    setToken: (token) => set({ token }),
 }));
