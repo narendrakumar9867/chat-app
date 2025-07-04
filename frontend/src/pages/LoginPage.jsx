@@ -1,9 +1,13 @@
-import { useState } from 'react'
+import { React, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Mail, Lock, Eye, EyeOff, Loader2, MessageSquare } from 'lucide-react'
 
 import { useAuthStore } from '../store/useAuthStore'
 import AuthImagePattern from '../components/AuthImagePattern'
+
+// firebase imports
+import { auth, provider } from "../utils/Firebase"
+import { signInWithPopup } from "firebase/auth"
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -16,6 +20,34 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     login(formData);
+  };
+
+  const googleLogin = async () => {
+    try {
+      const response = await signInWithPopup(auth, provider);
+      const user = response.user;
+      const userData = {
+        fullName: user.displayName,
+        email: user.email,
+        profilePic: user.photoURL,
+      }
+      const apiReponse = await fetch('http://localhost:7777/api/auth/google-login', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type' : 'application/json' },
+        body: JSON.stringify(userData)
+      })
+
+      if(!apiReponse.ok) {
+        throw new Error("Failed to login.")
+      }
+
+      const responseData = await apiReponse.json();
+      console.log("Google Login Response:", responseData);
+
+    } catch (error) {
+      console.log("Google Login Error:", error);
+    } 
   };
 
   return (
@@ -96,26 +128,14 @@ const LoginPage = () => {
                 "Sign in"
               )}
             </button>
-          </form>
 
-          {/* Google Auth Button */}
-          <div className="mt-4">
+            {/* Google Sign in */}
             <button
-              type="button"
-              className="btn btn-outline w-full flex items-center justify-center gap-2"
-              onClick={() => {
-                console.log("google login button clicked");
-                window.open("http://localhost:7777/api/auth/google", "_self");
-              }}
-            >
-              <img
-                src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-                alt="Google"
-                className="w-5 h-5"
-              />
-              Sign in with Google
-            </button>
-          </div>
+            type='button'
+            className='btn btn-primary w-full'
+            onClick={googleLogin}
+            >Sign In With Google</button>
+          </form>
 
           <div className="text-center">
             <p className="text-base-content/60">
