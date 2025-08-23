@@ -2,7 +2,7 @@ services:
   backend-dev:
     build:
       context: ./backend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.backend
       target: dev
     volumes:
       - ./backend:/app
@@ -17,7 +17,7 @@ services:
   frontend-dev:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.frontend
       target: dev
     volumes:
       - ./frontend:/app
