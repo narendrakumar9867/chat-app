@@ -34,7 +34,6 @@ const App = () => {
 
   return (
     <div data-theme={theme} >
-
       <Navbar />
 
       <Routes>
